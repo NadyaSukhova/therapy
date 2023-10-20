@@ -1,26 +1,33 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="root">
+    <header-component />
+    <add-form />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import AddForm from "@/components/AddForm.vue";
+import HeaderComponent from "@/components/HeaderComponent.vue";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  components: { AddForm, HeaderComponent },
+  data() {
+    return {};
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@font-face {
+  font-family: myFont;
+  src: url("./style/AlumniSans-Regular.ttf");
+}
+body {
+  background-color: #a1d9b7;
+  font-family: myFont;
+}
+option, select, button, input{
+  font-family: myFont;
+  font-size: 24px;
 }
 </style>
