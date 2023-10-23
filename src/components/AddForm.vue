@@ -1,6 +1,7 @@
+
 <template>
   <center>
-    <form @submit.prevent>
+    <form>
       <h3>Добавить запись</h3>
       <img id="thyme" src="../assets/thyme.png" />
       <label for="thought">Мысль:</label>
@@ -70,7 +71,7 @@
         виноватых. В данном случае возможно обвинение других или самообвинение.
       </div>
       <label for="argument">Опровержение:</label>
-      <textarea id="argument" v-model="argument"></textarea><br>
+      <textarea id="argument" v-model="argument"></textarea><br />
       <label for="date">Дата:</label>
       <input
         type="date"
@@ -89,14 +90,15 @@
 
 <script>
 import moment from "moment";
+import vuecookies from 'vue-cookies'
 
 export default {
   name: "AddForm",
   data() {
     return {
-      thought: "",
+      thought: "тест",
       mistakes: [],
-      argument: "",
+      argument: "тест",
       noteDate: moment().format("YYYY-MM-DD"),
       nowDate: moment().format("YYYY-MM-DD"),
       showHint: false,
@@ -104,12 +106,21 @@ export default {
   },
   methods: {
     addNote() {
-      console.log({
+      var note = {
+        id: Date.now(),
         thought: this.thought,
         mistakes: [...this.mistakes],
         argument: this.argument,
         date: this.noteDate,
-      });
+      };
+      if (vuecookies.get("allNotes") == null) {
+        vuecookies.set("allNotes", [note]);
+      } else {
+        vuecookies.set(
+          "allNotes",
+          [...vuecookies.get("allNotes"), note]
+        );
+      }
     },
   },
 };
