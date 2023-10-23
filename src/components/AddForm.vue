@@ -32,7 +32,7 @@
         <input type="checkbox" value="9" v-model="mistakes" />Ярлыки<br />
         <input type="checkbox" value="10" v-model="mistakes" />Вина
       </div>
-      <button id="question" @click="showHint = !showHint"></button>
+      <button id="question" @click="showHint = !showHint" type="button"></button>
       <div class="hint" v-if="showHint">
         <strong>«Всё или ничего».</strong> Этот вид когнитивных искажений
         описывает склонность к оценке своих личных качеств исключительно в
@@ -96,9 +96,9 @@ export default {
   name: "AddForm",
   data() {
     return {
-      thought: "тест",
+      thought: "",
       mistakes: [],
-      argument: "тест",
+      argument: "",
       noteDate: moment().format("YYYY-MM-DD"),
       nowDate: moment().format("YYYY-MM-DD"),
       showHint: false,

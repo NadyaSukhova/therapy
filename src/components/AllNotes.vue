@@ -5,13 +5,20 @@
       <img src="../assets/basil.png" id="basil" />
       <div id="notes" v-if="getNotes">
         <div id="note" v-for="note in getNotes.reverse()" :key="note.thought">
-          {{ note.date.slice(8, 10)+'.' + note.date.slice(5, 7)+'.' + note.date.slice(0, 4) }} <br />
-          Мысль: {{ note.thought }}
+          {{
+            note.date.slice(8, 10) +
+            "." +
+            note.date.slice(5, 7) +
+            "." +
+            note.date.slice(0, 4)
+          }}
+          <br />
+          <strong>Мысль:</strong> {{ note.thought }}
           <div v-if="note.mistakes.length != 0">
-            Ошибка мышления: {{ note.mistakes }}
+            <strong>Ошибка мышления:</strong> {{ getMistakes(note.mistakes) }}
           </div>
-          <div v-else>Ошибка мышления: не выбрано</div>
-          Опровержение: {{ note.argument }}
+          <div v-else><strong>Ошибка мышления:</strong> не выбрано</div>
+          <strong>Опровержение:</strong> {{ note.argument }}
           <hr
             style="margin-left: -12px; border-top: dashed 2px; color: #a1d9b7"
           />
@@ -29,7 +36,19 @@ export default {
   name: "AllNotes",
   data() {
     return {
-      notes: [],
+      mistakes: [
+        "Мышление «Всё или ничего»",
+        "Сверхобобщение",
+        "Пессимизм",
+        "Обесценивание положительного",
+        "Чтение мыслей",
+        "Ошибка предсказания",
+        "Преувеличение/преуменьшение",
+        "Эмоциональное обоснование",
+        "Императивы",
+        "Ярлыки",
+        "Вина",
+      ],
     };
   },
   computed: {
@@ -41,6 +60,15 @@ export default {
       }
     },
   },
+  methods :{
+    getMistakes(indexes) {
+      var res = "";
+      for (let index in indexes) {
+        res += this.mistakes[index] + ", ";
+      }
+      return res.slice(0, res.length - 2);
+    },
+  }
 };
 </script>
 
@@ -68,5 +96,9 @@ h3 {
   width: 53px;
   bottom: 0;
   left: 265px;
+}
+
+strong{
+  color: #297d77;
 }
 </style>
